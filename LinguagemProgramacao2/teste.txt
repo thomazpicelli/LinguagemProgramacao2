@@ -1,0 +1,1 @@
+Thomaz,10;Lucas,11;Z�,12;Marcelo,13;Cacique,20;HIGH_SCORE,20;
