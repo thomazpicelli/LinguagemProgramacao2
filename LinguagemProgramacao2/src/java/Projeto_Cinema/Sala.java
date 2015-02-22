@@ -1,6 +1,5 @@
 package Projeto_Cinema;
 
-import Semana_02.Jogador;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class Sala {
     private int numero;
@@ -42,8 +40,7 @@ public class Sala {
     public static void salvaSalas() throws IOException{
         File arquivoSai = new File("saida.txt");
         String sal = "";
-        for(int i=0; i< salas.size(); i++){
-            Sala s = salas.get(i);
+        for (Sala s : salas) {
             sal += s.getNumero() + "," + s.getLotacao() + "," + s.getOcupados() + ";";
         }
         System.out.println(sal);
@@ -59,10 +56,9 @@ public class Sala {
         
         String[] salaSTR = fileString.split(";");
         
-        salas = new ArrayList<Sala>();
+        salas = new ArrayList<>();
         
-        for (int i = 0; i < salaSTR.length; i++) {
-            String sala = salaSTR[i];
+        for (String sala : salaSTR) {
             String[] sal = sala.split(",");
             salas.add(new Sala(Integer.parseInt(sal[0]), Integer.parseInt(sal[1]), Integer.parseInt(sal[2])));
         }        
