@@ -8,10 +8,45 @@ import java.util.ArrayList;
  * @author thomazpicelli
  */
 public class ListaAtores implements Serializable{
-    private static ArrayList<Object> lista;
+    private static ArrayList<InfoAtor> lista;
 
     public ListaAtores() {
-        lista = new ArrayList<Object>();
+        lista = new ArrayList<InfoAtor>();
     }
-            
+    
+    public ArrayList<InfoAtor> getLista(){
+        return lista;
+    }
+
+    @Override
+    public String toString() {
+        return "ListaAtores{" + '}';
+    }
+    
+    public void adicionaAtor(Ator ator, String papel, String part){
+        InfoAtor ia = new InfoAtor(ator, papel, part);
+        lista.add(ia);
+    }
+    
+    public void removeAtor(Ator ator, String papel, String part){
+        for (InfoAtor infoAtor : lista) {
+            if(ator.compara(infoAtor.getAtor())){
+                lista.remove(infoAtor);
+            }
+        }
+    }
+    
+    public void substituiAtor(Ator ator1, Ator ator2, String papel, String part){
+        removeAtor(ator1, papel, part);
+        adicionaAtor(ator2, papel, part);
+    }
+    
+    public boolean procuraAtor(Ator ator){
+        boolean resp = false;
+        for (InfoAtor infoAtor : lista) {
+            if(ator.compara(infoAtor.getAtor()))
+                resp = true;
+        }
+        return resp;
+    }
 }
