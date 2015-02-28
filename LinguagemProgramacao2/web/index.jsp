@@ -19,13 +19,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link rel="stylesheet" type="text/css" href="css/padrao.css"/> <!-- CSS PADRAO -->
+        <link rel="stylesheet" type="text/css" href="css/acesso.css"/> <!-- CSS ACESSO DE PRODUTOS -->
     </head>
     <body>
         <header>
            <%@include file="headerIn.jsp"%>
         </header>
         <section>
-            
+            <div class="login">
+                <p>Já tenho cadastro</p></br>
+                    <form action = "menuPrincipal.lsp" method = "post">
+			Login:<input type="text" placeholder="Login" name="login"/></br>
+			Senha:<input type="password" placeholder="Senha" name="camposenha"/></br></br>
+                        Deseja salvar os seus dados?<input name="salvar" type="checkbox"/></p>
+			<input type="image" src="img/enviar.png" alt="Submit Form"/>
+                    </form>
+            </div>
         </section>
         <footer>
             
