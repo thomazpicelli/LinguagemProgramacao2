@@ -41,7 +41,7 @@
             
         </footer>
         <%
-            
+        
         Ator a = new Ator(1, "Johnny Depp", "EUA", new Date());
         ListaAtores listaAtores = new ListaAtores();
         listaAtores.adicionaAtor(a, "Jack", "principal");

@@ -18,5 +18,5 @@ public abstract class Funcionario implements Serializable{
         this.login = login;
         this.senha = senha;
     }
-    
+
 }
