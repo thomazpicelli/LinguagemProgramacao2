@@ -7,6 +7,9 @@ import java.io.Serializable;
  * @author thomazpicelli
  */
 public class Atendente extends Funcionario implements Serializable{
-    private int pk;
-    
+ 
+    public Atendente( int pk, String nome, String login, String senha) {
+        super(pk, nome, login, senha);
+    }
+
 }

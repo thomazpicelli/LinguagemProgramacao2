@@ -7,6 +7,10 @@ import java.io.Serializable;
  * @author thomazpicelli
  */
 public class Gerente extends Funcionario implements Serializable{
-    private int pk;
+
+    public Gerente(int pk, String nome, String login, String senha) {
+        super(pk, nome, login, senha);
+    }
     
+       
 }
