@@ -8,4 +8,7 @@ import java.io.Serializable;
  */
 public class Funcionario implements Serializable{
     private int pk;
+    private String nome;
+    private String login;
+    private String senha;
 }
