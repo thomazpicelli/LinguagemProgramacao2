@@ -33,7 +33,7 @@ public class Cinema_DB {
             //declaração do driver
             System.out.println("teste");
             Class.forName(driver).newInstance();
-        
+            
             // cria conexao
             connection = DriverManager.getConnection(protocol+dbname+";create=true");
             // criar statement
@@ -44,7 +44,7 @@ public class Cinema_DB {
         
         try {
             //apagar tabelas antes de criar
-            String SqlDrop = "Drop table Generos; Drop table Ator";
+            String SqlDrop = "Drop table Generos; Drop table Ator;";
             statement.execute(SqlDrop);
         } catch (SQLException sQLException) {
             sQLException.printStackTrace();
