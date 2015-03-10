@@ -1,4 +1,4 @@
-package com.br.lp2.model;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;

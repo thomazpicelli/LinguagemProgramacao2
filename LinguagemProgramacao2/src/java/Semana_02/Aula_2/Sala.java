@@ -1,4 +1,4 @@
-package Projeto_Cinema;
+package Semana_02.Aula_2;
 
 import java.io.File;
 import java.io.FileInputStream;
