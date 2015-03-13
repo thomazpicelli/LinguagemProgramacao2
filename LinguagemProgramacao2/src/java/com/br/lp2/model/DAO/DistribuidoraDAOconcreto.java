@@ -1,7 +1,7 @@
 package com.br.lp2.model.DAO;
 
 import com.br.lp2.model.connectionFactory.ConnectionFactory;
-import com.br.lp2.model.javabeans.Genero;
+import com.br.lp2.model.javabeans.Distribuidora;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,32 +12,32 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class GeneroDAOconcreto implements GeneroDAO{
+public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
     
     public static void main(String[] args) {
-        GeneroDAO generoDAO = new GeneroDAOconcreto();
+        DistribuidoraDAO distribuidoraDAO = new DistribuidoraDAOconcreto();
         
-        ArrayList<Genero> listaGenero = generoDAO.readGenero();
-        for (Genero listaGenero1 : listaGenero){
-            System.out.println(listaGenero1.getPk()+ " - " + listaGenero1.getNome());
+        ArrayList<Distribuidora> listadiDistribuidoras = distribuidoraDAO.readDistristribuidora();
+        for (Distribuidora listadiDistribuidora1 : listadiDistribuidoras){
+            System.out.println(listadiDistribuidora1.getPk()+ " - " + listadiDistribuidora1.getNome());
         }
     }
     
-    public GeneroDAOconcreto(){
+    public DistribuidoraDAOconcreto(){
         ConnectionFactory cf = new ConnectionFactory();
         connection = cf.getConnection("derby");
     }
     
     @Override
-    public boolean insertGenero(Genero genero) {
+    public boolean insertDistribuidora(Distribuidora distribuidora) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO genero(nome) VALUES(?)";
+            String sql = "INSERT INTO distribuidora(nome) VALUES(?)";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, genero.getNome());
+            statement.setString(1, distribuidora.getNome());
             rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
@@ -47,15 +47,15 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public ArrayList<Genero> readGenero() {
-        ArrayList<Genero> lista = new ArrayList();
+    public ArrayList<Distribuidora> readDistristribuidora() {
+        ArrayList<Distribuidora> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM genero";
+            String sql = "SELECT * FROM distribuidora";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Genero c = new Genero(rs.getInt("id"), rs.getString("nome"));
-                lista.add(c);
+                Distribuidora d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));
+                lista.add(d);
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -64,46 +64,46 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public Genero readGeneroById(int pk) {
-        Genero g =null;
+    public Distribuidora readDistribuidoraById(int id) {
+        Distribuidora d = null;
         try {
-            String sql = "SELECT * FROM genero WHERE pk =?";
+            String sql = "SELECT * FROM distribuidora WHERE pk =?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, pk);
+            statement.setInt(1, d.getPk());
             rs = statement.executeQuery();
             while (rs.next()) {
-                g = new Genero(rs.getInt("id"), rs.getString("nome"));
+                d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return g;
+        return d;
     }
 
     @Override
-    public Genero readGeneroByNome(String nome) {
-        Genero g =null;
+    public Distribuidora readDistribuidoraByNome(String nome) {
+        Distribuidora d = null;
         try {
-            String sql = "SELECT * FROM genero WHERE nome =?";
+            String sql = "SELECT * FROM distribuidora WHERE nome =?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, nome);
             rs = statement.executeQuery();
             while (rs.next()) {
-                g = new Genero(rs.getInt("id"), rs.getString("nome"));
+                d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return g;
+        return d;
     }
 
     @Override
-    public boolean updateGenero(int id, Genero genero) {
+    public boolean updateDistribuidora(int id, Distribuidora distribuidora) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE genero SET nome=? WHERE id=?";
+            String sql = "UPDATE distribuidora SET nome=? WHERE id=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, genero.getNome());
+            statement.setString(1, distribuidora.getNome());
             statement.setInt(2, id);
             int r = statement.executeUpdate();
             resultado = r>0;
@@ -114,10 +114,10 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public boolean deleteGenero(int id) {
+    public boolean deleteDistribuidora(int id) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM genero WHERE id = ?";
+            String sql = "DELETE FROM distribuidora WHERE id = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id); 
             int r = statement.executeUpdate();
@@ -129,10 +129,10 @@ public class GeneroDAOconcreto implements GeneroDAO{
     }
 
     @Override
-    public boolean deleteGenero(Genero genero) {
+    public boolean deleteDistribuidora(Distribuidora distribuidora) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM genero WHERE VALUES(?)";
+            String sql = "DELETE FROM distribuidora WHERE VALUES(?)";
             statement = connection.prepareStatement(sql);
             int r = statement.executeUpdate();
             resultado = r>0;

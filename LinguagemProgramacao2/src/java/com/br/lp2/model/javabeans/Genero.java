@@ -27,6 +27,14 @@ public class Genero implements Serializable{
         return nome;
     }
 
+    public void setPk(int pk) {
+        this.pk = pk;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
         return "Genero{" + "pk=" + pk + ", nome=" + nome + '}';

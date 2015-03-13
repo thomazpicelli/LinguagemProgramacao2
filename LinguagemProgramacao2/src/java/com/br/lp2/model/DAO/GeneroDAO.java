@@ -14,8 +14,8 @@ public interface GeneroDAO {
     
     //READ
     public ArrayList<Genero> readGenero();
-    public Genero reaGeneroById(int id);
-    public Genero reaGeneroByNome(String nome);
+    public Genero readGeneroById(int id);
+    public Genero readGeneroByNome(String nome);
     
     //UPDATE
     public boolean updateGenero(int id, Genero genero);
