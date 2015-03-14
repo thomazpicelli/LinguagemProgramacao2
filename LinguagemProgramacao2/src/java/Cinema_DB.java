@@ -1,16 +1,22 @@
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.br.lp2.model.DAO.*;
+import com.br.lp2.model.javabeans.*;
+import java.util.ArrayList;
 
 /**
  * @version 1.0
  * @author thomazpicelli
  */
 public class Cinema_DB {
+    public static void main(String[] args) {
+        GeneroDAO generoDAO = new GeneroDAOconcreto();
+        
+        ArrayList<Genero> listaGenero = generoDAO.readGenero();
+        for (Genero listaGenero1 : listaGenero){
+            System.out.println(listaGenero1.getPk()+ " - " + listaGenero1.getNome());
+        }
+    }
+    /*
     public static final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
     public static final String protocol = "jdbc:derby:";
     public static final String dbname = "cinema_db";
@@ -104,5 +110,6 @@ public class Cinema_DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-    }       
+    }  
+    */
 }

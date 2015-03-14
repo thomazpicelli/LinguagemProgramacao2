@@ -17,15 +17,6 @@ public class GeneroDAOconcreto implements GeneroDAO{
     private static PreparedStatement statement;
     private static ResultSet rs;  
     
-    public static void main(String[] args) {
-        GeneroDAO generoDAO = new GeneroDAOconcreto();
-        
-        ArrayList<Genero> listaGenero = generoDAO.readGenero();
-        for (Genero listaGenero1 : listaGenero){
-            System.out.println(listaGenero1.getPk()+ " - " + listaGenero1.getNome());
-        }
-    }
-    
     public GeneroDAOconcreto(){
         ConnectionFactory cf = new ConnectionFactory();
         connection = cf.getConnection("derby");
