@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author thomazpicelli
  */
 public interface GeneroDAO {
-     //CRUD DE GENERO
+    //CRUD DE GENERO
     //CREATE
     public boolean insertGenero(Genero genero);
     

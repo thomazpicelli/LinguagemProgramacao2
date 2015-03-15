@@ -24,9 +24,11 @@ Create table Atendente(
 Create table Ator(
     id int,
     nome varchar(20)
+    nacionalidade varchar(20)
+    datanasc date
 );
 
- Insert into Ator values(1,'Brad'),(2,'Tom');
+ Insert into Ator values(1,'Brad','brasileiro','2015-01-01'),(2,'Tom','gringo','2015-02-02');
 
 Create table Cliente(
     pk int
