@@ -1,9 +1,9 @@
 package com.br.lp2.model.DAO;
 
 import com.br.lp2.model.connectionFactory.ConnectionFactory;
-import com.br.lp2.model.javabeans.Ator;
+import com.br.lp2.model.javabeans.Cliente;
+import com.br.lp2.model.javabeans.Cliente.Especiais;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,25 +13,25 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class AtorDAOconcreto implements AtorDAO{
+public class ClienteDAOconcreto implements ClienteDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
     
-    public AtorDAOconcreto(){
+    public ClienteDAOconcreto(){
         ConnectionFactory cf = new ConnectionFactory();
         connection = cf.getConnection("derby");
     }
     
     @Override
-    public boolean insertAtor(Ator ator) {
+    public boolean insertCliente(Cliente cliente) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO ator(nome,nacionalidade,datanasc) VALUES(?,?,?)";
+            String sql = "INSERT INTO cliente(nome,anonasc,tipo) VALUES(?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, ator.getNome());
-            statement.setString(2, ator.getNacionalidade());
-            statement.setDate(3, (Date)ator.getDatanasc());
+            statement.setString(1, cliente.getNome());
+            statement.setInt(2, cliente.getAnoNasc());
+            statement.setObject(3,(Especiais)cliente.getTipo());
             rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
@@ -41,15 +41,15 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public ArrayList<Ator> readAtor() {
-        ArrayList<Ator> lista = new ArrayList();
+    public ArrayList<Cliente> readCliente() {
+        ArrayList<Cliente> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM ator";
+            String sql = "SELECT * FROM cliente";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Ator a = new Ator(rs.getInt("pk"), rs.getString("nome"), rs.getString("nacionalidade"), rs.getDate("datanasc"));
-                lista.add(a);
+                Cliente c = new Cliente(rs.getInt("pk"), rs.getString("nome"), rs.getInt("anonasc"), (Especiais)rs.getObject("tipo"));
+                lista.add(c);
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -58,62 +58,62 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public Ator readAtorById(int id) {
-        Ator a =null;
+    public Cliente readClienteById(int id) {
+        Cliente c = null;
         try {
-            String sql = "SELECT * FROM ator WHERE pk =?";
+            String sql = "SELECT * FROM clinte WHERE pk =?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                a = new Ator(rs.getInt("pk"), rs.getString("nome"), rs.getString("nacionalidade"), rs.getDate("datanasc"));
+                c = new Cliente(rs.getInt("pk"), rs.getString("nome"), rs.getInt("anonasc"), (Especiais)rs.getObject("tipo"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return a;
+        return c;
     }
 
     @Override
-    public Ator readAtorByNome(String nome) {
-        Ator a = null;
+    public Cliente readClienteByNome(String nome) {
+        Cliente c = null;
         try {
-            String sql = "SELECT * FROM ator WHERE nome =?";
+            String sql = "SELECT * FROM cliente WHERE nome =?";
             statement = connection.prepareStatement(sql);
             statement.setString(1, nome);
             rs = statement.executeQuery();
             while (rs.next()) {
-                a = new Ator(rs.getInt("pk"), rs.getString("nome"), rs.getString("nacionalidade"), rs.getDate("datanasc"));
+                c = new Cliente(rs.getInt("pk"), rs.getString("nome"), rs.getInt("anonasc"), (Especiais)rs.getObject("tipo"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return a;
+        return c;
     }
 
     @Override
-    public boolean updateAtor(int id, Ator ator) {
+    public boolean updateCliente(int id, Cliente cliente) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE ator SET nome=? nacionalidade=? datanasc=? WHERE id=?";
+            String sql = "UPDATE cliente SET nome=? datanasc=? tipo=? WHERE id=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, ator.getNome());
-            statement.setString(2, ator.getNacionalidade());
-            statement.setDate(3, (Date)ator.getDatanasc());
+            statement.setString(1, cliente.getNome());
+            statement.setInt(2, cliente.getAnoNasc());
+            statement.setObject(3,(Especiais) cliente.getTipo());
             statement.setInt(4, id);
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return resultado;    
+        return resultado;
     }
 
     @Override
-    public boolean deleteAtor(int id) {
+    public boolean deleteCliente(int id) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM ator WHERE id = ?";
+            String sql = "DELETE FROM cliente WHERE id = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id); 
             int r = statement.executeUpdate();
@@ -125,10 +125,10 @@ public class AtorDAOconcreto implements AtorDAO{
     }
 
     @Override
-    public boolean deleteAtor(Ator ator) {
-        boolean resultado = false;
+    public boolean deleteCliente(Cliente cliente) {
+       boolean resultado = false;
         try {
-            String sql = "DELETE FROM ator WHERE VALUES(?)";
+            String sql = "DELETE FROM cliente WHERE VALUES(?)";
             statement = connection.prepareStatement(sql);
             int r = statement.executeUpdate();
             resultado = r>0;
@@ -137,5 +137,4 @@ public class AtorDAOconcreto implements AtorDAO{
         }
         return resultado;
     }
-    
 }
