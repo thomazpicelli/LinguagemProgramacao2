@@ -4,7 +4,7 @@
     Author     : thomazpicelli
 --%>
 
-<%@page import="com.br.lp2.model.Cliente"%>
+<%@page import="com.br.lp2.model.javabeans.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div>

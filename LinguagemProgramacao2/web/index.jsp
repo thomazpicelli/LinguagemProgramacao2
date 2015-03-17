@@ -4,13 +4,13 @@
     Author     : thomazpicelli
 --%>
 
-<%@page import="com.br.lp2.model.Filme.tiposituacao"%>
-<%@page import="com.br.lp2.model.Distribuidora"%>
-<%@page import="com.br.lp2.model.Filme"%>
-<%@page import="com.br.lp2.model.Genero"%>
-<%@page import="com.br.lp2.model.Diretor"%>
-<%@page import="com.br.lp2.model.ListaAtores"%>
-<%@page import="com.br.lp2.model.Ator"%>
+<%@page import="com.br.lp2.model.javabeans.Filme.tiposituacao"%>
+<%@page import="com.br.lp2.model.javabeans.Distribuidora"%>
+<%@page import="com.br.lp2.model.javabeans.Filme"%>
+<%@page import="com.br.lp2.model.javabeans.Genero"%>
+<%@page import="com.br.lp2.model.javabeans.Diretor"%>
+<%@page import="com.br.lp2.model.javabeans.ListaAtores"%>
+<%@page import="com.br.lp2.model.javabeans.Ator"%>
 <%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,7 +31,7 @@
                     <form action = "menuPrincipal.lsp" method = "post">
 			Login:<input type="text" placeholder="Login" name="login"/></br>
 			Senha:<input type="password" placeholder="Senha" name="camposenha"/></br></br>
-                        Deseja salvar os seus dados?<input name="salvar" type="checkbox"/></p>
+                        Deseja salvar os seus dados?<input name="salvar" type="checkbox"/>
 			<input type="image" src="img/enviar.png" alt="Submit Form"/>
                     </form>
             </div>
