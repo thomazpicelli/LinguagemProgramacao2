@@ -58,8 +58,8 @@ Create table Filme(
     pk int,
     id_diretor int,
     id_genero int,
-    listaAtores int,
-    distribuidora int,
+    id_listaAtores int,
+    id_distribuidora int,
     nome varchar(50),
     classificacao int,
     ano int,
@@ -83,7 +83,8 @@ Create table Gerente(
 );
 
 Create table InfoAtor(
-    id_ator,
+    pk int,
+    id_ator int,
     papel varchar(50),
     part varchar(50)
 );
@@ -115,7 +116,7 @@ Create table Sala(
 Create table Sessao(
     pk int,
     id_filme int,
-    id-sala int,
+    id_sala int,
     horario date,
     legendado bit,
     id_listaIngresso int

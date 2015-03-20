@@ -16,12 +16,13 @@ public class Sessao implements Serializable{
     private boolean legendado;
     private ListaIngressos lista;
 
-    public Sessao(int pk, Filme filme, Sala sala, Date horario, boolean legendado) {
+    public Sessao(int pk, Filme filme, Sala sala, Date horario, boolean legendado, ListaIngressos listaIngresso) {
         this.pk = pk;
         this.filme = filme;
         this.sala = sala;
         this.horario = horario;
         this.legendado = legendado;
+        this.lista = listaIngresso;
     }
 
     public int getPk() {
@@ -67,6 +68,7 @@ public class Sessao implements Serializable{
     public ListaIngressos getLista() {
         return lista;
     }
+    
 
     @Override
     public String toString() {

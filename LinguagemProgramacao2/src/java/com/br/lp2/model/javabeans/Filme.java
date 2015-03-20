@@ -116,6 +116,14 @@ public class Filme implements Serializable{
         this.idioma = idioma;
     }
 
+    public Distribuidora getDistribuidora() {
+        return distribuidora;
+    }
+
+    public void setDistribuidora(Distribuidora distribuidora) {
+        this.distribuidora = distribuidora;
+    }
+
     @Override
     public String toString() {
         return "Filme{" + "pk=" + pk + ", diretor=" + diretor + ", genero=" + genero + ", listaAtores=" + listaAtores + ", nome=" + nome + ", classificacao=" + classificacao + ", ano=" + ano + ", duracao=" + duracao + ", situacao=" + situacao + ", idioma=" + idioma + '}';

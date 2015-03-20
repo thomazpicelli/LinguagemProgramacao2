@@ -1,7 +1,7 @@
 package com.br.lp2.model.DAO;
 
 import com.br.lp2.model.connectionFactory.ConnectionFactory;
-import com.br.lp2.model.javabeans.Distribuidora;
+import com.br.lp2.model.javabeans.Sala;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,23 +12,26 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
+public class SalaDAOconcreto implements SalaDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
-
-    public DistribuidoraDAOconcreto(){
+    
+    public SalaDAOconcreto(){
         ConnectionFactory cf = new ConnectionFactory();
         connection = cf.getConnection("derby");
-    }
-    
+    }    
+
     @Override
-    public boolean insertDistribuidora(Distribuidora distribuidora) {
+    public boolean insertSala(Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO distribuidora(nome) VALUES(?)";
+            String sql = "INSERT INTO Sala (pk, numero, lotacao, especial, situacao) VALUES(?,?,?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, distribuidora.getNome());
+            statement.setInt(1, sala.getPk());
+            statement.setInt(2, sala.getNumero());
+            statement.setInt(3, sala.getLotacao());
+            statement.setObject(4, sala.getSituacao());
             rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
@@ -38,15 +41,15 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public ArrayList<Distribuidora> readDistristribuidora() {
-        ArrayList<Distribuidora> lista = new ArrayList();
+    public ArrayList<Sala> readGerente() {
+        ArrayList<Sala> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM distribuidora";
+            String sql = "SELECT * FROM Sala";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                Distribuidora d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));
-                lista.add(d);
+                Sala s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), (Sala.Situacao)rs.getObject("situacao"));
+                lista.add(s);
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -55,64 +58,68 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public Distribuidora readDistribuidoraById(int id) {
-        Distribuidora d = null;
+    public Sala readSalaById(int id) {
+        Sala s = null;
         try {
-            String sql = "SELECT * FROM distribuidora WHERE pk =?";
+            String sql = "SELECT * FROM Sala WHERE pk =?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, d.getPk());
+            statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));
+                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), (Sala.Situacao)rs.getObject("situacao"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return d;
+        return s;
     }
 
     @Override
-    public Distribuidora readDistribuidoraByNome(String nome) {
-        Distribuidora d = null;
+    public Sala readSalaByNumero(int numero) {
+        Sala s = null;
         try {
-            String sql = "SELECT * FROM distribuidora WHERE nome =?";
+            String sql = "SELECT * FROM Sala WHERE numero =?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, nome);
+            statement.setInt(1, numero);
             rs = statement.executeQuery();
             while (rs.next()) {
-                d = new Distribuidora(rs.getInt("pk"), rs.getString("nome"));
+                s = new Sala(rs.getInt("pk"), rs.getInt("numero"), rs.getInt("lotacao"), rs.getInt("especial"), (Sala.Situacao)rs.getObject("situacao"));
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return d;
+        return s;
     }
 
     @Override
-    public boolean updateDistribuidora(int id, Distribuidora distribuidora) {
+    public boolean updateSala(int id, Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE distribuidora SET nome=? WHERE id=?";
+            String sql = "UPDATE sala SET pk=? numero=? lotacao=? especial=? situacao=?";
             statement = connection.prepareStatement(sql);
-            statement.setString(1, distribuidora.getNome());
-            statement.setInt(2, id);
+             statement = connection.prepareStatement(sql);
+            statement.setInt(1, sala.getPk());
+            statement.setInt(2, sala.getNumero());
+            statement.setInt(3, sala.getLotacao());
+            statement.setObject(4, sala.getSituacao());
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return resultado;
+        return resultado;    
     }
 
     @Override
-    public boolean deleteDistribuidora(int id) {
+    public boolean deleteSala(int id) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM distribuidora WHERE id = ?";
+            String sql = "DELETE FROM Sala WHERE pk = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id); 
             int r = statement.executeUpdate();
             resultado = r>0;
+            
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
@@ -120,13 +127,14 @@ public class DistribuidoraDAOconcreto implements DistribuidoraDAO{
     }
 
     @Override
-    public boolean deleteDistribuidora(Distribuidora distribuidora) {
+    public boolean deleteSala(Sala sala) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM distribuidora WHERE VALUES(?)";
+            String sql = "DELETE FROM sala WHERE VALUES(?)";
             statement = connection.prepareStatement(sql);
             int r = statement.executeUpdate();
             resultado = r>0;
+            
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
