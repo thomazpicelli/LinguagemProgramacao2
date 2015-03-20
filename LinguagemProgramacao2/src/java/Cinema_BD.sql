@@ -21,6 +21,8 @@ Create table Atendente(
     senha varchar(15)
 );
 
+Inser into Atendente values(1,'Maria','mariasilva','senha'),(2,'Silvia','silviacosta','senha');
+
 Create table Ator(
     id int,
     nome varchar(20),
@@ -81,6 +83,8 @@ Create table Gerente(
     login varchar(15),
     senha varchar(15)
 );
+
+Insert into Gerente values(1,'Mario','mariosuzuki','senha'),(2,'Sueli','suelivieira','senha');
 
 Create table InfoAtor(
     pk int,
