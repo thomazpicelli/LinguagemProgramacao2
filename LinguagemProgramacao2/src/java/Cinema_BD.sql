@@ -21,16 +21,12 @@ Create table Atendente(
     senha varchar(15)
 );
 
-Inser into Atendente values(1,'Maria','mariasilva','senha'),(2,'Silvia','silviacosta','senha');
-
 Create table Ator(
     id int,
     nome varchar(20),
     nacionalidade varchar(20),
     datanasc date
 );
-
- Insert into Ator values(1,'Brad','brasileiro','2015-01-01'),(2,'Tom','gringo','2015-02-02');
 
 Create table Cliente(
     pk int,
@@ -39,22 +35,16 @@ Create table Cliente(
     tipo varchar(15)
 );
 
-Insert into Cliente values(1,'Maria',1987,'geral'),(1,'Joao',1997,'obeso'),(3,'Andre',1978,'geral');
-
 Create table Diretor(
     pk int,
     codigo int,
     nome varchar(30)
 );
 
-Inser into Diretor values(1,3672,'Quentin Tarantino'),(2,3243,'Steven Spielberg'),(3,4243,'Pedro Almodóvar'),(4,53532,'Alfred Hitchcock'),(5,3232,'Roman Polanski'),(6,3232,'Woody Allen'),(7,3232,'Stanley Kubrick'),(8,322,'Ingmar Bergman'),(9,3232,'Christopher Nolan');
-
 Create table Distribuidora(
     pk int,
     nome varchar(50)
 );
-
-Insert into Distribuidora values(1,'Warner Bros. Pictures'),(2,'Disney'),(3,'Sony Pictures'),(4,'Universal Studios'),(5,'Paramount Pictures');
 
 Create table Filme(
     pk int,
@@ -75,16 +65,12 @@ Create table Generos(
     nome varchar(20)
 );
 
-insert into Generos values(1,'ação'),(2,'Animação'),(3,'Chanchada'),(4,'Comédia'),(5,'Cult'),(6,'Dança'),(7,'Documentário'),(8,'Drama'),(9,'Erótico'),(10,'Fantasma'),(11,'Faroeste'),(12,'Ficção Cientifica'),(13,'Guerra'),(14,'Musical'),(15,'Filme Noir'),(16,'Policial'),(17,'Romance'),(18,'Suspense'),(19,'Terror'),(20,'Trash');
-
 Create table Gerente(
     pk int,
     nome varchar(40),
     login varchar(15),
     senha varchar(15)
 );
-
-Insert into Gerente values(1,'Mario','mariosuzuki','senha'),(2,'Sueli','suelivieira','senha');
 
 Create table InfoAtor(
     pk int,
@@ -125,3 +111,21 @@ Create table Sessao(
     legendado bit,
     id_listaIngresso int
 );
+
+alter table filme add FOREIGN KEY(id_diretor) references diretor(pk);
+alter table filme add FOREIGN KEY(id_genero) references genero(id);
+alter table filme add FOREIGN KEY(id_listaAtores) references listaAtores(pk);
+alter table filme add FOREIGN KEY(id_distribuidora) references distribuidora(pk);
+alter table infoator add FOREIGN KEY(id_ator) references ator(pk);
+alter table infoator add FOREIGN KEY(id_ator) references ator(pk);
+alter table sessao add FOREIGN KEY(id_filme) references filme(pk);
+alter table sessao add FOREIGN KEY(id_sala) references sala(pk);
+alter table sessao add FOREIGN KEY(id_listaIngresso) references listaingresso(pk);
+
+Insert into Atendente values(1,'Maria','mariasilva','senha'),(2,'Silvia','silviacosta','senha');
+Insert into Ator values(1,'Brad','brasileiro','2015-01-01'),(2,'Tom','gringo','2015-02-02');
+Insert into Cliente values(1,'Maria',1987,'geral'),(1,'Joao',1997,'obeso'),(3,'Andre',1978,'geral');
+Insert into Diretor values(1,3672,'Quentin Tarantino'),(2,3243,'Steven Spielberg'),(3,4243,'Pedro Almodóvar'),(4,53532,'Alfred Hitchcock'),(5,3232,'Roman Polanski'),(6,3232,'Woody Allen'),(7,3232,'Stanley Kubrick'),(8,322,'Ingmar Bergman'),(9,3232,'Christopher Nolan');
+Insert into Distribuidora values(1,'Warner Bros. Pictures'),(2,'Disney'),(3,'Sony Pictures'),(4,'Universal Studios'),(5,'Paramount Pictures');
+insert into Generos values(1,'ação'),(2,'Animação'),(3,'Chanchada'),(4,'Comédia'),(5,'Cult'),(6,'Dança'),(7,'Documentário'),(8,'Drama'),(9,'Erótico'),(10,'Fantasma'),(11,'Faroeste'),(12,'Ficção Cientifica'),(13,'Guerra'),(14,'Musical'),(15,'Filme Noir'),(16,'Policial'),(17,'Romance'),(18,'Suspense'),(19,'Terror'),(20,'Trash');
+Insert into Gerente values(1,'Mario','mariosuzuki','senha'),(2,'Sueli','suelivieira','senha');
