@@ -41,5 +41,5 @@ public class InfoAtor implements Serializable{
     public String toString() {
         return "InfoAtor{" + "ator=" + ator + ", Papel=" + Papel + ", part=" + part + '}';
     }
-        
+
 }

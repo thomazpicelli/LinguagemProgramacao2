@@ -61,7 +61,7 @@ Create table Filme(
 );
 
 Create table Generos(
-    id int, 
+    pk int, 
     nome varchar(20)
 );
 
@@ -73,7 +73,6 @@ Create table Gerente(
 );
 
 Create table InfoAtor(
-    pk int,
     id_ator int,
     papel varchar(50),
     part varchar(50)
@@ -87,12 +86,13 @@ Create table Ingresso(
 );
 
 Create table ListaAtores(
-    //lista infoatores
+    pk int,
+    id_infoator int
 );
 
 Create table ListaIngressos(
     pk int,
-    //lista de ingressos
+    id_ingresso int
 );
 
 Create table Sala(
