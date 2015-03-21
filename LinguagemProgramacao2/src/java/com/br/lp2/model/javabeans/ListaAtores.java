@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @author thomazpicelli
  */
 public class ListaAtores implements Serializable{
+    private int pk;
     private static ArrayList<InfoAtor> lista;
 
     public ListaAtores() {
@@ -49,4 +50,13 @@ public class ListaAtores implements Serializable{
         }
         return resp;
     }
+
+    public int getPk() {
+        return pk;
+    }
+
+    public void setPk(int pk) {
+        this.pk = pk;
+    }
+    
 }
