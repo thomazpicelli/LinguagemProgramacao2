@@ -1,53 +1,52 @@
+Drop table Sessao;
+Drop table Filme;
+Drop table InfoAtor;
 Drop table Atendente;
 Drop table Ator;
 Drop table Cliente;
 Drop table Diretor;
 Drop table Distribuidora;
-Drop table Filme;
-Drop table Funcionario;
 Drop table Genero;
 Drop table Gerente;
-Drop table InfoAtor;
 Drop table Ingresso;
 Drop table ListaAtores;
 Drop table ListaIngressos;
 Drop table Sala;
-Drop table Sessao;
 
 Create table Atendente(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     nome varchar(40),
     login varchar(15),
     senha varchar(15)
 );
 
 Create table Ator(
-    id int,
+    id int not null primary key generated always as identity(start with 1, increment by 1),
     nome varchar(20),
     nacionalidade varchar(20),
     datanasc date
 );
 
 Create table Cliente(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     nome varchar(30),
     anoNasc int,
     tipo varchar(15)
 );
 
 Create table Diretor(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     codigo int,
     nome varchar(30)
 );
 
 Create table Distribuidora(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     nome varchar(50)
 );
 
 Create table Filme(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_diretor int,
     id_genero int,
     id_listaAtores int,
@@ -60,13 +59,13 @@ Create table Filme(
     idioma varchar(20)
 );
 
-Create table Generos(
-    pk int, 
+Create table Genero(
+    pk int not null primary key generated always as identity(start with 1, increment by 1), 
     nome varchar(20)
 );
 
 Create table Gerente(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     nome varchar(40),
     login varchar(15),
     senha varchar(15)
@@ -79,24 +78,24 @@ Create table InfoAtor(
 );
 
 Create table Ingresso(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     id int,
-    inteira bit,
-    tipo varchar(20),
+    inteira boolean,
+    tipo varchar(20)
 );
 
 Create table ListaAtores(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_infoator int
 );
 
 Create table ListaIngressos(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_ingresso int
 );
 
 Create table Sala(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     numero int,
     lotacao int,
     especial int,
@@ -104,28 +103,27 @@ Create table Sala(
 );
 
 Create table Sessao(
-    pk int,
+    pk int not null primary key generated always as identity(start with 1, increment by 1),
     id_filme int,
     id_sala int,
     horario date,
-    legendado bit,
-    id_listaIngresso int
+    legendado boolean,
+    id_listaIngressos int
 );
 
-alter table filme add FOREIGN KEY(id_diretor) references diretor(pk);
-alter table filme add FOREIGN KEY(id_genero) references genero(id);
+alter table filme add FOREIGN KEY(id_diretor) references Diretor(pk);
+alter table filme add FOREIGN KEY(id_genero) references genero(pk);
 alter table filme add FOREIGN KEY(id_listaAtores) references listaAtores(pk);
 alter table filme add FOREIGN KEY(id_distribuidora) references distribuidora(pk);
-alter table infoator add FOREIGN KEY(id_ator) references ator(pk);
-alter table infoator add FOREIGN KEY(id_ator) references ator(pk);
-alter table sessao add FOREIGN KEY(id_filme) references filme(pk);
-alter table sessao add FOREIGN KEY(id_sala) references sala(pk);
-alter table sessao add FOREIGN KEY(id_listaIngresso) references listaingresso(pk);
+alter table infoator add FOREIGN KEY(id_ator) references ator(id);
+alter table Sessao add FOREIGN KEY(id_filme) references filme(pk);
+alter table Sessao add FOREIGN KEY(id_sala) references sala(pk);
+alter table Sessao add FOREIGN KEY(id_listaIngressos) references listaingressos(pk);
 
-Insert into Atendente values(1,'Maria','mariasilva','senha'),(2,'Silvia','silviacosta','senha');
-Insert into Ator values(1,'Brad','brasileiro','2015-01-01'),(2,'Tom','gringo','2015-02-02');
-Insert into Cliente values(1,'Maria',1987,'geral'),(1,'Joao',1997,'obeso'),(3,'Andre',1978,'geral');
-Insert into Diretor values(1,3672,'Quentin Tarantino'),(2,3243,'Steven Spielberg'),(3,4243,'Pedro Almodóvar'),(4,53532,'Alfred Hitchcock'),(5,3232,'Roman Polanski'),(6,3232,'Woody Allen'),(7,3232,'Stanley Kubrick'),(8,322,'Ingmar Bergman'),(9,3232,'Christopher Nolan');
-Insert into Distribuidora values(1,'Warner Bros. Pictures'),(2,'Disney'),(3,'Sony Pictures'),(4,'Universal Studios'),(5,'Paramount Pictures');
-insert into Generos values(1,'ação'),(2,'Animação'),(3,'Chanchada'),(4,'Comédia'),(5,'Cult'),(6,'Dança'),(7,'Documentário'),(8,'Drama'),(9,'Erótico'),(10,'Fantasma'),(11,'Faroeste'),(12,'Ficção Cientifica'),(13,'Guerra'),(14,'Musical'),(15,'Filme Noir'),(16,'Policial'),(17,'Romance'),(18,'Suspense'),(19,'Terror'),(20,'Trash');
-Insert into Gerente values(1,'Mario','mariosuzuki','senha'),(2,'Sueli','suelivieira','senha');
+Insert into Atendente(nome, login, senha) values('Maria','mariasilva','senha'),('Silvia','silviacosta','senha');
+Insert into Ator(nome, nacionalidade, datanasc) values('Brad','brasileiro','2015-01-01'),('Tom','gringo','2015-02-02');
+Insert into Cliente(nome, anoNasc, tipo) values('Maria',1987,'geral'),('Joao',1997,'obeso'),('Andre',1978,'geral');
+Insert into Diretor(codigo, nome) values(3672,'Quentin Tarantino'),(3243,'Steven Spielberg'),(4243,'Pedro Almodóvar'),(53532,'Alfred Hitchcock'),(3232,'Roman Polanski'),(3232,'Woody Allen'),(3232,'Stanley Kubrick'),(322,'Ingmar Bergman'),(3232,'Christopher Nolan');
+Insert into Distribuidora(nome) values('Warner Bros. Pictures'),('Disney'),('Sony Pictures'),('Universal Studios'),('Paramount Pictures');
+insert into Genero(nome) values('ação'),('Animação'),('Comédia'),('Cult'),('Dança'),('Documentário'),('Drama'),('Erótico'),('Fantasma'),('Faroeste'),('Ficção Cientifica'),('Guerra'),('Musical'),('Filme Noir'),('Policial'),('Romance'),('Suspense'),('Terror'),('Trash');
+Insert into Gerente(nome, login, senha) values('Mario','mariosuzuki','senha'),('Sueli','suelivieira','senha');
