@@ -15,6 +15,22 @@ public class ListaIngressos implements Serializable{
     public ListaIngressos(){
         lista = new ArrayList<>();
     }
+
+    public int getPk() {
+        return pk;
+    }
+
+    public void setPk(int pk) {
+        this.pk = pk;
+    }
+
+    public static ArrayList<Ingresso> getLista() {
+        return lista;
+    }
+
+    public static void setLista(ArrayList<Ingresso> lista) {
+        ListaIngressos.lista = lista;
+    }
     
     public void adicionaIngresso(Ingresso ingresso){
         lista.add(ingresso);

@@ -1,7 +1,7 @@
 package com.br.lp2.model.DAO;
 
 import com.br.lp2.model.connectionFactory.ConnectionFactory;
-import com.br.lp2.model.javabeans.ListaAtores;
+import com.br.lp2.model.javabeans.ListaIngressos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,25 +12,25 @@ import java.util.ArrayList;
  *
  * @author thomazpicelli
  */
-public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
+public class ListaIngressosDAOconcreto implements ListaIngressosDAO{
     private static Connection connection;
     private static PreparedStatement statement;
     private static ResultSet rs;  
     
-    public ListaAtoresDAOconcreto(){
+    public ListaIngressosDAOconcreto(){
         ConnectionFactory cf = new ConnectionFactory();
         connection = cf.getConnection("derby");
     }
     
     @Override
-    public boolean insertListaAtores(ListaAtores listaAtores) {
+    public boolean insertListaIngressos(ListaIngressos listaIngressos) {
         boolean resultado = false;
         try {
-            String sql = "INSERT INTO ListaAtores (pk, id_infoator) VALUES(?,?)";
+            String sql = "INSERT INTO ListaIngressos (pk, id_ingresso) VALUES(?,?)";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, listaAtores.getPk());
-            statement.setObject(2, listaAtores.getLista());
-             rs = statement.executeQuery();
+            statement.setInt(1, listaIngressos.getPk());
+            statement.setObject(2, listaIngressos.getLista());
+            rs = statement.executeQuery();
             resultado = statement.execute();
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -39,15 +39,15 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
     }
 
     @Override
-    public ArrayList<ListaAtores> readListaAtores() {
-        ArrayList<ListaAtores> lista = new ArrayList();
+    public ArrayList<ListaIngressos> readListaIngressos() {
+        ArrayList<ListaIngressos> lista = new ArrayList();
         try {
-            String sql = "SELECT * FROM ListaAtores";
+            String sql = "SELECT * FROM ListaIngressos";
             statement = connection.prepareStatement(sql);
             rs = statement.executeQuery();
             while (rs.next()) {
-                ListaAtores la = new ListaAtores();
-                lista.add(la);
+                ListaIngressos li = new ListaIngressos();
+                lista.add(li);
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
@@ -56,30 +56,30 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
     }
 
     @Override
-    public ListaAtores readListaAtoresById(int id) {
-        ListaAtores la = null;
+    public ListaIngressos readListaIngressosById(int id) {
+        ListaIngressos li = null;
         try {
-            String sql = "SELECT * FROM ListaAtores WHERE pk =?";
+            String sql = "SELECT * FROM ListaIngressos WHERE pk =?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             rs = statement.executeQuery();
             while (rs.next()) {
-                la = new ListaAtores();
+                li = new ListaIngressos();
             }
         } catch (SQLException sQLException) {
             System.out.println(sQLException.getMessage());
         }
-        return la;
+        return li;
     }
 
     @Override
-    public boolean updateListaAtores(int id, ListaAtores listaAtores) {
+    public boolean updateListaIngressos(int id, ListaIngressos listaIngressos) {
         boolean resultado = false;
         try {
-            String sql = "UPDATE ListaAtores SET pk=? id_infoator=?";
+            String sql = "UPDATE ListaIngressos SET pk=? id_ingresso=?";
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, listaAtores.getPk());
-            statement.setObject(2, listaAtores.getLista());
+            statement.setInt(1, listaIngressos.getPk());
+            statement.setObject(2, listaIngressos.getLista());
             int r = statement.executeUpdate();
             resultado = r>0;
         } catch (SQLException sQLException) {
@@ -89,10 +89,10 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
     }
 
     @Override
-    public boolean deleteListaAtores(int id) {
+    public boolean deleteListaIngressos(int id) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM ListaAtores WHERE pk = ?";
+            String sql = "DELETE FROM ListaIngressos WHERE pk = ?";
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id); 
             int r = statement.executeUpdate();
@@ -105,10 +105,10 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
     }
 
     @Override
-    public boolean deleteListaAtores(ListaAtores listaAtores) {
+    public boolean deleteListaIngressos(ListaIngressos listaIngressos) {
         boolean resultado = false;
         try {
-            String sql = "DELETE FROM ListaAtores WHERE VALUES(?)";
+            String sql = "DELETE FROM ListaIngressos WHERE VALUES(?)";
             statement = connection.prepareStatement(sql);
             int r = statement.executeUpdate();
             resultado = r>0;
@@ -118,5 +118,4 @@ public class ListaAtoresDAOconcreto implements ListaAtoresDAO{
         }
         return resultado;
     }
-    
 }
